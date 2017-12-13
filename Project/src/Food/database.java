@@ -48,6 +48,7 @@ public class database {
 			rest.clear();
 			restname.clear();
 			imgname.clear();
+			noOfrest = 0;
 			
 			String SQL = "select * from restaurant where price="+price+" and `group` = "+group+";";
 			// System.out.print(SQL);
@@ -93,3 +94,4 @@ public class database {
 	} // end main
 		
 }
+
