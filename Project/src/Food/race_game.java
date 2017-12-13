@@ -1,11 +1,21 @@
 package Food;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
-import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 public class race_game extends JFrame {
 	
@@ -17,7 +27,19 @@ public class race_game extends JFrame {
 	
 	public JLabel label1;
 	public JLabel label2;
-
+	static Clip clip;
+	   static void PlaySound(File Sound) {
+	        try {
+	           clip = AudioSystem.getClip();
+	           clip.open(AudioSystem.getAudioInputStream(Sound));
+	           clip.start();
+	           clip.loop(5);
+	        }
+	        catch(Exception e) {
+	           
+	        }
+	     }
+	  static File sound = new File("./bgm/race.wav");
 	
 //	JPanel p = new JPanel();
 
@@ -72,11 +94,13 @@ public class race_game extends JFrame {
 	 * Create the frame.
 	 */
 	public race_game() {
+		
 		super("레이싱 게임");
-		getContentPane().setBackground(new Color(204, 153, 51));
+		getContentPane().setBackground(UIManager.getColor("Button.background"));
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		PlaySound(sound);
 		
 		Container c = this.getContentPane();
 		c.setLayout(null); //배치관리자 없음
@@ -96,6 +120,7 @@ public class race_game extends JFrame {
 		
 
 
+
 		
 		
 
@@ -110,12 +135,12 @@ public class race_game extends JFrame {
 		
 		// 라인 생성 라벨
 		JLabel line1 = new JLabel();
-		line1.setIcon(new ImageIcon("./image/line1.png"));;
+		line1.setIcon(new ImageIcon("./image/line1.png"));
 		line1.setBounds(146, 127, 37, 531);
 		getContentPane().add(line1);
 		
 		line2 = new JLabel();
-		line2.setIcon(new ImageIcon("./image/line2.png"));;
+		line2.setIcon(new ImageIcon("./image/line2.png"));
 		line2.setBounds(654, 127, 37, 531);
 		getContentPane().add(line2);
 		
@@ -146,7 +171,7 @@ public class race_game extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				main main= new Food.main();  // money 클래스 실행
 				setVisible(false);
-				
+				clip.close();
 				
 			}
 		});
@@ -175,3 +200,4 @@ public class race_game extends JFrame {
 		
 	}
 }
+
