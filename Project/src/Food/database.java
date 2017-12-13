@@ -1,5 +1,6 @@
 package Food;
 
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,6 +14,7 @@ public class database {
 	public static String no;
 	static ArrayList<Integer> rest = new ArrayList<Integer>();
 	static ArrayList<String> restname = new ArrayList<String>();
+	static ArrayList<String> imgname = new ArrayList<String>();
 	static int noOfrest = 0;
  
 	//public static void main(String[] args)	{
@@ -30,12 +32,22 @@ public class database {
 			System.out.println("Mysql DB Connection.");
 
 			String price, group;
-			Scanner scan = new Scanner(System.in);
+			//Scanner scan = new Scanner(System.in);
 			
-			System.out.print("input price (0~2) : ");
-			price = scan.nextLine();
-			System.out.print("input group (0~5) : ");
-			group = scan.nextLine();
+			//System.out.print("input price (0~2) : ");
+			//price = scan.nextLine();
+			//System.out.print("input group (0~5) : ");
+			//group = scan.nextLine();
+			
+			group = String.valueOf(main.menu_num);
+			price = String.valueOf(main.money_num);
+			
+			System.out.println("group : " + main.menu_num);
+			System.out.println("price : " + main.money_num);
+			
+			rest.clear();
+			restname.clear();
+			imgname.clear();
 			
 			String SQL = "select * from restaurant where price="+price+" and `group` = "+group+";";
 			// System.out.print(SQL);
@@ -61,10 +73,13 @@ public class database {
 			} // end while
 
 			con.close();            
-			System.out.println("no of restaurant : " + noOfrest);
+			// System.out.println("no of restaurant : " + noOfrest);
 			
-			for(int i=0; i<noOfrest; i++)
-				System.out.println(rest.get(i) + ".jpg");
+			for(int i=0; i<noOfrest; i++) {
+				//System.out.println(rest.get(i) + ".jpg");
+				imgname.add(noOfrest, rest.get(i) + ".jpg");
+				//System.out.println(imgname.get(i));
+			}
 		} // end try
 
 		catch(Exception e) {
